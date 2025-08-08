@@ -1,7 +1,7 @@
 import { EditableProperty, Undo } from "../internal"
 
 export class MathJaxProperty extends EditableProperty<string> {
-	private input: HTMLInputElement
+	private input: HTMLTextAreaElement
 
 	public constructor(initialValue?: string) {
 		super(initialValue ?? "")
@@ -21,9 +21,8 @@ export class MathJaxProperty extends EditableProperty<string> {
 			formulaSpan1.innerHTML = "$"
 			col.appendChild(formulaSpan1)
 
-			this.input = document.createElement("input") as HTMLInputElement
+			this.input = document.createElement("textarea") as HTMLTextAreaElement
 			this.input.classList.add("form-control")
-			this.input.type = "text"
 			this.input.value = this.value ?? ""
 			col.appendChild(this.input)
 
@@ -53,5 +52,9 @@ export class MathJaxProperty extends EditableProperty<string> {
 		if (this.input) {
 			this.input.value = this.value
 		}
+	}
+
+	public toLatexString(): string {
+		return this.value ? this.value.replaceAll(" ", "\\ ").replaceAll("\n", "\\\\") : ""
 	}
 }

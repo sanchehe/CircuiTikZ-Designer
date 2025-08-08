@@ -378,7 +378,8 @@ export class PolygonComponent extends ShapeComponent {
 
 			let posStr = this.textPos.add(labelShift).toTikzString()
 
-			let latexStr = this.mathJaxLabel.value ? "$" + this.mathJaxLabel.value + "$" : ""
+			let rawLabel = this.mathJaxLabel.toLatexString()
+			let latexStr = rawLabel ? "$" + rawLabel + "$" : ""
 			latexStr =
 				latexStr && this.labelColor.value ?
 					"\\textcolor" + this.labelColor.value.toTikzString() + "{" + latexStr + "}"

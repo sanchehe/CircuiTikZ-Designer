@@ -492,7 +492,7 @@ export abstract class CircuitComponent {
 		// @ts-ignore
 		window.MathJax.texReset()
 		// @ts-ignore
-		return window.MathJax.tex2svgPromise(this.mathJaxLabel.value, {}).then((node: Element) => {
+		return window.MathJax.tex2svgPromise(this.mathJaxLabel.toLatexString(), {}).then((node: Element) => {
 			// mathjax renders the text via an svg container. That container also contains definitions and SVG.Use elements. get that container
 			let svgElement = new SVG.Svg(node.querySelector("svg"))
 

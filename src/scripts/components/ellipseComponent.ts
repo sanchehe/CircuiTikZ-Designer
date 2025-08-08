@@ -394,7 +394,8 @@ export class EllipseComponent extends ShapeComponent {
 					id + ".center"
 				:	id + "." + this.positionChoice.value.name
 
-			let latexStr = this.mathJaxLabel.value ? "$" + this.mathJaxLabel.value + "$" : ""
+			let rawLabel = this.mathJaxLabel.toLatexString()
+			let latexStr = rawLabel ? "$" + rawLabel + "$" : ""
 			latexStr =
 				latexStr && this.labelColor.value ?
 					"\\textcolor" + this.labelColor.value.toTikzString() + "{" + latexStr + "}"
