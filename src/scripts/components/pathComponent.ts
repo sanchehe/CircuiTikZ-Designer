@@ -362,7 +362,8 @@ export class PathComponent extends CircuitikzComponent {
 		const scaleFactor =
 			this.scaleProperty.value.value != 1 ? new SVG.Number(this.scaleProperty.value.value * 1.4, "cm") : undefined
 
-		let latexStr = this.mathJaxLabel.value ? "$" + this.mathJaxLabel.value + "$" : ""
+		let rawLabel = this.mathJaxLabel.toLatexString()
+		let latexStr = rawLabel ? "$" + rawLabel + "$" : ""
 		latexStr =
 			latexStr && this.labelColor.value ?
 				"\\textcolor" + this.labelColor.value.toTikzString() + "{" + latexStr + "}"
@@ -373,7 +374,7 @@ export class PathComponent extends CircuitikzComponent {
 			" to[" +
 			this.referenceSymbol.tikzName +
 			(this.name.value === "" ? "" : ", name=" + this.name.value) +
-			(this.mathJaxLabel.value !== "" ?
+			(rawLabel !== "" ?
 				", l" +
 				(this.labelSide.value ? "_" : "") +
 				"={" +

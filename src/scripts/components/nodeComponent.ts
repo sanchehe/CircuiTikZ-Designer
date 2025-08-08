@@ -232,7 +232,8 @@ export class NodeComponent extends CircuitikzComponent {
 			}
 
 			let posStr = this.positionChoice.value.key == defaultBasicDirection.key ? id + ".text" : id + "." + pos
-			let latexStr = this.mathJaxLabel.value ? "$" + this.mathJaxLabel.value + "$" : ""
+			let rawLabel = this.mathJaxLabel.toLatexString()
+			let latexStr = rawLabel ? "$" + rawLabel + "$" : ""
 			latexStr =
 				latexStr && this.labelColor.value ?
 					"\\textcolor" + this.labelColor.value.toTikzString() + "{" + latexStr + "}"
