@@ -55,6 +55,11 @@ export class MathJaxProperty extends EditableProperty<string> {
 	}
 
 	public toLatexString(): string {
-		return this.value ? this.value.replaceAll(" ", "\\ ").replaceAll("\n", "\\\\") : ""
+		if (!this.value) {
+			return ""
+		}
+
+		const lines = this.value.split("\n").map((line) => line.replaceAll(" ", "\\ "))
+		return lines.length > 1 ? "\\begin{matrix}" + lines.join("\\\\") + "\\end{matrix}" : lines[0]
 	}
 }
